@@ -6,13 +6,25 @@ public class Login {
     private String password;
     private String studentName;
     private int studentId;
+    private int id;
 
-    public Login(int studentId, String studentName, String emailAddress, String password)
+    public Login(int id, int studentId, String studentName, String emailAddress, String password)
     {
+        this.id = id;
         this.emailAddress = emailAddress;
         this.password = password;
         this.studentName = studentName;
         this.studentId = studentId;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public String getEmailAddress()

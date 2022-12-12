@@ -16,13 +16,15 @@ import java.util.ArrayList;
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder> {
 
-    private FragmentManager fm;
+    private FragmentManager fragmentManager;
     private ArrayList<Conversation> conversations;
+    private int currentPositionInList = -1;
 
-    public ConversationAdapter (FragmentManager fm, ArrayList<Conversation> conversations)
+
+    public ConversationAdapter (FragmentManager fm, ArrayList<Conversation> conversation)
     {
-        this.fm = fm;
-        this.conversations = conversations;
+        fragmentManager = fm;
+        conversations = conversation;
     }
 
     @NonNull
@@ -36,6 +38,10 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ConversationViewHolder holder, int position) {
+
+        Conversation conversation = conversations.get(position);
+
+        holder.setData(conversation, position);
 
     }
 
@@ -51,13 +57,30 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         private ImageView profilePicture;
         private TextView person1;
         private TextView person2;
+        private Conversation currentConversation = null;
 
         public ConversationViewHolder(@NonNull View itemView) {
             super(itemView);
 
+           profilePicture =  itemView.findViewById(R.id.imv_StudentPicture);
+           person1 = itemView.findViewById(R.id.tv_StudentName);
+           person2 = itemView.findViewById(R.id.tv_StudentName);
+
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
         }
+
+        public void setData(Conversation c, int position )
+        {
+            profilePicture.setImageResource(R.drawable.default_profile_image);
+
+            currentPositionInList = position;
+            currentConversation = c;
+
+        }
+
+
+
 
         @Override
         public void onClick(View v) {

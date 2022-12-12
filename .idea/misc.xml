@@ -3,11 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.1595" />
+        <entry key="app/src/main/res/drawable/rounded_corner1.xml" value="0.1595" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27760416666666665" />
         <entry key="app/src/main/res/layout/conversation_row_item.xml" value="0.290625" />
         <entry key="app/src/main/res/layout/fragment_conversation.xml" value="0.2916666666666667" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2916666666666667" />
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/fragment_messages.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/message_recieved_item.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/message_sent_item.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/rounded_corner.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/rounded_corner1.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/type_message_area.xml" value="0.2916666666666667" />
       </map>
     </option>
   </component>

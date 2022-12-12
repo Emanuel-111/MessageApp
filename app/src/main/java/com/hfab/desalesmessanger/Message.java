@@ -6,10 +6,10 @@ public class Message {
 
     private int conversationId;
     private String message;
-    private Timestamp timestamp;
+    private String timestamp;
     private int senderId;
 
-    public Message(int conversationId, String message, Timestamp timestamp, int senderId)
+    public Message(int conversationId, String message, String timestamp, int senderId)
     {
         this.conversationId = conversationId;
         this.message = message;
@@ -37,12 +37,12 @@ public class Message {
         this.message = message;
     }
 
-    public Timestamp getTimestamp()
+    public String getTimestamp()
     {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp)
+    public void setTimestamp(String timestamp)
     {
         this.timestamp = timestamp;
     }

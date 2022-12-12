@@ -3,6 +3,7 @@ package com.hfab.desalesmessanger;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,12 +62,14 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getContext(), "Please put a DeSales email", Toast.LENGTH_SHORT).show();
                 }
 
-                // For now, I'm gonna generate a random studentId and we'll have the
-                // SQL database grab the id's at a later time
-                Random randomNumber = new Random();
-                randomNumber.nextInt(500);
+                else
 
-                // Name will be added when the database is created
+                {
+                    LoginFragmentDirections.ActionLoginFragmentToConversationFragment action =
+                            LoginFragmentDirections.actionLoginFragmentToConversationFragment(1);
+
+                    Navigation.findNavController(view).navigate(action);
+                }
 
             }
         });
