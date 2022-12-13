@@ -31,20 +31,18 @@ public class LoginDBHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void saveStudent(long studentID, String name, String email, String password)
+    public void saveLogin(String studentName, String emailAddress, String password)
     {
         //INSERT INTO student (student ID, name, email, password)
         // VALUES (1249469, 'Joseph Traglia', 'jt9469@desales.edu', 'Desales12345')
-        String insertString = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
+        String insertString = String.format("INSERT INTO %s (%s, %s, %s) " +
                         "VALUES (%d, '%s', '%s', '%s')",
                 DBContract.LoginEntry.TABLE_NAME,
-                DBContract.LoginEntry.COLUMN_STUDENT_ID,
                 DBContract.LoginEntry.COLUMN_NAME,
                 DBContract.LoginEntry.COLUMN_EMAIL,
                 DBContract.LoginEntry.COLUMN_PASSWORD,
-                studentID,
-                name,
-                email,
+                studentName,
+                emailAddress,
                 password);
 
         System.out.println("SAVING: " + insertString);
@@ -70,7 +68,6 @@ public class LoginDBHelper extends SQLiteOpenHelper {
 
         //Get the position of your columns
         int idPos = cursor.getColumnIndex(DBContract.LoginEntry.COLUMN_ID);
-        int studentIDPos = cursor.getColumnIndex(DBContract.LoginEntry.COLUMN_STUDENT_ID);
         int namePos = cursor.getColumnIndex(DBContract.LoginEntry.COLUMN_NAME);
         int emailPos = cursor.getColumnIndex(DBContract.LoginEntry.COLUMN_EMAIL);
         int passwordPos = cursor.getColumnIndex(DBContract.LoginEntry.COLUMN_PASSWORD);
@@ -79,13 +76,12 @@ public class LoginDBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext())
         {
             //Get information from current record
-            long id = cursor.getLong(idPos);
-            long studentID = cursor.getLong(studentIDPos);
+            int id = cursor.getInt(idPos);
             String name = cursor.getString(namePos);
             String email = cursor.getString(emailPos);
             String password = cursor.getString(passwordPos);
 
-            allStudents.add(new Login((int)id, (int)studentID, name, email, password));
+            allStudents.add(new Login(id, name, email, password));
         }
 
         cursor.close();

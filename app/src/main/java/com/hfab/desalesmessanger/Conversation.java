@@ -2,54 +2,80 @@ package com.hfab.desalesmessanger;
 
 public class Conversation {
 
-    private int conversationId;
-    private String person1;
-    private String person2;
+        private int id;
+        private int student1ID;
+        private int student2ID;
+        private int imageID;
+        private String timestamp;
+        private String lastMessageSent;
 
-    public Conversation(int conversationId, String person1, String person2)
-    {
-        this.conversationId = conversationId;
-        this.person1 = person1;
-        this.person2 = person2;
-    }
+        public Conversation(int id, int student1ID, int student2ID, int imageID, String timestamp, String lastMessageSent)
+        {
+            this.id = id;
+            this.student1ID = student1ID;
+            this.student2ID = student2ID;
+            this.imageID = imageID;
+            this.timestamp = timestamp;
+            this.lastMessageSent = lastMessageSent;
+        }
 
-    public int getConversationId()
-    {
-        return this.conversationId;
-    }
+        public int getId() {
+            return id;
+        }
 
-    public void setConversationId(int conversationId)
-    {
-        this.conversationId = conversationId;
-    }
+        public void setId(int id) {
+            this.id = id;
+        }
 
-    public String getPerson1()
-    {
-        return this.person1;
-    }
+        public int getStudent1ID() {
+            return student1ID;
+        }
 
-    public void setPerson1(String person1)
-    {
-        this.person1 = person1;
-    }
+        public void setStudent1ID(int student1ID) {
+            this.student1ID = student1ID;
+        }
 
-    public String getPerson2()
-    {
-        return this.person2;
-    }
+        public int getStudent2ID() {
+            return student2ID;
+        }
 
-    public void setPerson2(String person2)
-    {
-        this.person2 = person2;
-    }
+        public void setStudent2ID(int student2ID) {
+            this.student2ID = student2ID;
+        }
 
-    public String toString()
-    {
-        return "CONVERSATION ID: " + conversationId +
-                "\nPERSON: " + person1 +
-                "\nPERSON2: " + person2;
-    }
+        public int getImageID() {
+            return imageID;
+        }
 
+        public void setImageID(int imageID) {
+            this.imageID = imageID;
+        }
 
+        public String getTimestamp() {
+            return timestamp;
+        }
 
+        public void setTimestamp(String timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public String getLastMessageSent() {
+            return lastMessageSent;
+        }
+
+        public void setLastMessageSent(String lastMessageSent) {
+            this.lastMessageSent = lastMessageSent;
+        }
+
+        @Override
+        public String toString() {
+            return "Conversation{" +
+                    "id=" + id +
+                    ", student1ID=" + student1ID +
+                    ", student2ID=" + student2ID +
+                    ", imageID=" + imageID +
+                    ", timestamp='" + timestamp + '\'' +
+                    ", lastMessageSent='" + lastMessageSent + '\'' +
+                    '}';
+        }
 }

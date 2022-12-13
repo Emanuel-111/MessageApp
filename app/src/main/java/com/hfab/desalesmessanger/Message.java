@@ -4,64 +4,72 @@ import java.sql.Timestamp;
 
 public class Message {
 
-    private int conversationId;
-    private String message;
+    private int id;
+    private int conversationID;
+    private String contents;
     private String timestamp;
-    private int senderId;
+    private int senderID;
 
-    public Message(int conversationId, String message, String timestamp, int senderId)
+    public final static int TYPE_SENT = 0;
+    public final static int TYPE_RECEIVED = 1;
+
+    public Message(int id, int conversationID, String contents, String timestamp, int senderID)
     {
-        this.conversationId = conversationId;
-        this.message = message;
+        this.id = id;
+        this.conversationID = conversationID;
+        this.contents = contents;
         this.timestamp = timestamp;
-        this.senderId = senderId;
+        this.senderID = senderID;
     }
 
-    public int getConversationId()
-    {
-        return conversationId;
+    public int getId() {
+        return id;
     }
 
-    public void setConversationId(int conversationId)
-    {
-        this.conversationId = conversationId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getMessage()
-    {
-        return message;
+    public int getConversationID() {
+        return conversationID;
     }
 
-    public void setMessage(String message)
-    {
-        this.message = message;
+    public void setConversationID(int conversationID) {
+        this.conversationID = conversationID;
     }
 
-    public String getTimestamp()
-    {
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp)
-    {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
-    public int getSenderId()
-    {
-        return senderId;
+    public int getSenderID() {
+        return senderID;
     }
 
-    public void setSenderId(int senderId)
-    {
-        this.senderId = senderId;
+    public void setSenderID(int senderID) {
+        this.senderID = senderID;
     }
 
-    public String toString()
-    {
-        return "CONVERSATION ID: " + conversationId +
-                "\nMESSAGE: " + message +
-                "\nTIME SENT: " + timestamp;
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", conversationID=" + conversationID +
+                ", contents='" + contents + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", senderID=" + senderID +
+                '}';
     }
-
 }

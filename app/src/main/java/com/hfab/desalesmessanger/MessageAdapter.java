@@ -1,5 +1,6 @@
 package com.hfab.desalesmessanger;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     private FragmentManager fragmentManager;
     private static ArrayList<Message> messages;
+    private MessageDBHelper messageDBHelper;
+    private Context context;
 
     public MessageAdapter(FragmentManager man) {
+        messageDBHelper = new MessageDBHelper(context);
         fragmentManager = man;
-        messages = DataBase.getMessages();
+        messages = messageDBHelper.fetchAllMessages();
     }
     @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -44,7 +48,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public int getItemViewType(int position) {
 
-        return messages.get(position).getType();
+        return messages.get(position).getSenderID();
     }
 
 
@@ -75,8 +79,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         public abstract int getTextViewID();
 
         public void setData(Message m, int position) {
-            txtMessage.setText(m.getMessage());
-            currentTime.setText(m.getTime());
+            txtMessage.setText(m.getContents());
+            currentTime.setText(m.getTimestamp());
             currentPositionInList = position;
             currentMessage = m;
         }

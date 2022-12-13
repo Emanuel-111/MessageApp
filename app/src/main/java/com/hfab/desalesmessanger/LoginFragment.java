@@ -21,6 +21,7 @@ public class LoginFragment extends Fragment {
     private EditText etvEmailAddress;
     private EditText etvPassword;
     private Button btnLogin;
+    private LoginDBHelper loginDBHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,8 +30,10 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        loginDBHelper = new LoginDBHelper(getContext());
+
         // Fill the arrayList with the logins
-        ArrayList<Login> allLogins = LoginDatabase.getLogins();
+        ArrayList<Login> allLogins = loginDBHelper.fetchAllStudents();
 
         etvEmailAddress = view.findViewById(R.id.etv_email);
         etvPassword = view.findViewById(R.id.etv_password);

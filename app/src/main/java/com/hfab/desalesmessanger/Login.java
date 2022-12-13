@@ -5,16 +5,14 @@ public class Login {
     private String emailAddress;
     private String password;
     private String studentName;
-    private int studentId;
     private int id;
 
-    public Login(int id, int studentId, String studentName, String emailAddress, String password)
+    public Login(int id, String studentName, String emailAddress, String password)
     {
         this.id = id;
         this.emailAddress = emailAddress;
         this.password = password;
         this.studentName = studentName;
-        this.studentId = studentId;
     }
 
     public int getId()
@@ -57,19 +55,13 @@ public class Login {
         this.studentName = studentName;
     }
 
-    public int getStudentId()
-    {
-        return studentId;
+    @Override
+    public String toString() {
+        return "Login{" +
+                "emailAddress='" + emailAddress + '\'' +
+                ", password='" + password + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", id=" + id +
+                '}';
     }
-
-    public void setStudentId(int studentId)
-    {
-        this.studentId = studentId;
-    }
-
-    public String toString()
-    {
-        return "";
-    }
-
 }

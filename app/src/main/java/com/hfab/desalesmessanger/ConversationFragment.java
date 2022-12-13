@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+
+
 public class ConversationFragment extends Fragment {
 
     @Override
@@ -30,8 +35,12 @@ public class ConversationFragment extends Fragment {
 
         FragmentManager fm = getParentFragmentManager();
 
+        ConversationDBHelper convDBHelper = new ConversationDBHelper(getContext());
+
+        ArrayList<Conversation> conversations = convDBHelper.fetchAllConversations();
+
         //adapter
-        ConversationAdapter adapter = new ConversationAdapter(fm, ConversationDatabase.getData());
+       ConversationAdapter adapter = new ConversationAdapter(fm, conversations);
         rv.setAdapter(adapter);
 
         //manager connects the above 2
