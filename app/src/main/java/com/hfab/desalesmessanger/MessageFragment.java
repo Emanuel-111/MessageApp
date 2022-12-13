@@ -25,7 +25,7 @@ public class MessageFragment extends Fragment {
     private ImageView imvSend;
     private EditText newMessage;
     private Date currentTime;
-    private MessageDBHelper messageDBHelper;
+    private DBHelper.MessageDBHelper messageDBHelper;
     private Context context;
 
     @Override
@@ -41,7 +41,7 @@ public class MessageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 context = getContext();
-                messageDBHelper = new MessageDBHelper(context);
+                messageDBHelper = new DBHelper.MessageDBHelper(context);
                 ArrayList<Message> messages;
                 messages = messageDBHelper.fetchAllMessages();
                 Calendar c = Calendar.getInstance();

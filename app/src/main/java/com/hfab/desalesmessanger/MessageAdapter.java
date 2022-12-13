@@ -17,11 +17,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     private FragmentManager fragmentManager;
     private static ArrayList<Message> messages;
-    private MessageDBHelper messageDBHelper;
+    private DBHelper.MessageDBHelper messageDBHelper;
     private Context context;
 
     public MessageAdapter(FragmentManager man) {
-        messageDBHelper = new MessageDBHelper(context);
+        messageDBHelper = new DBHelper.MessageDBHelper(context);
         fragmentManager = man;
         messages = messageDBHelper.fetchAllMessages();
     }

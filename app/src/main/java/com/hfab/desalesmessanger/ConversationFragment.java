@@ -35,7 +35,7 @@ public class ConversationFragment extends Fragment {
 
         FragmentManager fm = getParentFragmentManager();
 
-        ConversationDBHelper convDBHelper = new ConversationDBHelper(getContext());
+        DBHelper.ConversationDBHelper convDBHelper = new DBHelper.ConversationDBHelper(getContext());
 
         ArrayList<Conversation> conversations = convDBHelper.fetchAllConversations();
 

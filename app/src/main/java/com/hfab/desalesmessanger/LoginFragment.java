@@ -21,7 +21,7 @@ public class LoginFragment extends Fragment {
     private EditText etvEmailAddress;
     private EditText etvPassword;
     private Button btnLogin;
-    private LoginDBHelper loginDBHelper;
+    private DBHelper.LoginDBHelper loginDBHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +30,7 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        loginDBHelper = new LoginDBHelper(getContext());
+        loginDBHelper = new DBHelper.LoginDBHelper(getContext());
 
         // Fill the arrayList with the logins
         ArrayList<Login> allLogins = loginDBHelper.fetchAllStudents();
@@ -42,36 +42,29 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                allLogins.add(loginDBHelper.saveLogin();)
+
                 String emailAddress = etvEmailAddress.getText().toString();
                 String password = etvPassword.getText().toString();
 
-                if (emailAddress.equals("") && password.equals(""))
+                for (int i = 0; i < allLogins.size(); i++)
                 {
-                    Toast.makeText(getContext(), "Please enter email or password", Toast.LENGTH_SHORT).show();
-                }
+                    if(emailAddress.equals(allLogins.get(i).getEmailAddress()))
+                    {
+                        if(password.equals(allLogins.get(i).getPassword()))
+                        {
+                            LoginFragmentDirections.ActionLoginFragmentToConversationFragment action =
+                                    LoginFragmentDirections.actionLoginFragmentToConversationFragment(allLogins.get(i).getId());
 
-                else if (emailAddress.equals(""))
-                {
-                    Toast.makeText(getContext(), "Please enter email", Toast.LENGTH_SHORT).show();
-                }
 
-                else if (password.equals(""))
-                {
-                    Toast.makeText(getContext(), "Please enter password", Toast.LENGTH_SHORT).show();
-                }
+                        }
+                    }
 
-                else if (!emailAddress.contains("desales.edu"))
-                {
-                    Toast.makeText(getContext(), "Please put a DeSales email", Toast.LENGTH_SHORT).show();
-                }
+                    else
+                    {
 
-                else
-
-                {
-                    LoginFragmentDirections.ActionLoginFragmentToConversationFragment action =
-                            LoginFragmentDirections.actionLoginFragmentToConversationFragment(1);
-
-                    Navigation.findNavController(view).navigate(action);
+                    }
                 }
 
             }
