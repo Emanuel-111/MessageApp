@@ -3,7 +3,6 @@ package com.hfab.desalesmessanger;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,12 +26,13 @@ public class MessageFragment extends Fragment {
     private Date currentTime;
     private DBHelper.MessageDBHelper messageDBHelper;
     private Context context;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_messages, container, false);
+        view = inflater.inflate(R.layout.fragment_messages, container, false);
 
         super.onCreate(savedInstanceState);
         imvSend = view.findViewById(R.id.imvSend);
@@ -62,12 +62,11 @@ public class MessageFragment extends Fragment {
 
     private void setUpRecyclerView(){
 
-        RecyclerView rv = getView().findViewById(R.id.recyclerView);
-
+        RecyclerView rv = view.findViewById(R.id.rv_message);
         FragmentManager fm = getParentFragmentManager();
 
         //adapter
-        MessageAdapter adapter = new MessageAdapter(fm);
+        MessageAdapter adapter = new MessageAdapter(fm, getContext());
         rv.setAdapter(adapter);
 
         //manager connects the above 2

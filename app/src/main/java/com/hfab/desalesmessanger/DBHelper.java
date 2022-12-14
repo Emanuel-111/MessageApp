@@ -17,27 +17,23 @@ public class DBHelper {
         private static final String DB_NAME = "logins.db";
         private static final int DB_VERSION = 1;
 
-        public LoginDBHelper(Context context)
-        {
+        public LoginDBHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
         }
 
         @Override
-        public void onCreate(SQLiteDatabase sqLiteDatabase)
-        {
+        public void onCreate(SQLiteDatabase sqLiteDatabase) {
             System.out.println(DBContract.LoginEntry.CREATE_LOGIN_TABLE_CMD);
             sqLiteDatabase.execSQL(DBContract.LoginEntry.CREATE_LOGIN_TABLE_CMD);
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1)
-        {
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
             sqLiteDatabase.execSQL(DBContract.LoginEntry.DROP_LOGIN_TABLE_CMD);
             onCreate(sqLiteDatabase);
         }
 
-        public void saveLogin(String studentName, String emailAddress, String password)
-        {
+        public void saveLogin(String studentName, String emailAddress, String password) {
             //INSERT INTO student (student ID, name, email, password)
             // VALUES (1249469, 'Joseph Traglia', 'jt9469@desales.edu', 'Desales12345')
             String insertString = String.format("INSERT INTO %s (%s, %s, %s) " +
@@ -58,8 +54,175 @@ public class DBHelper {
             db.close();
         }
 
-        public ArrayList<Login> fetchAllStudents()
-        {
+        public void updateSqlLogins() {
+            String updateString1 = String.format("UPDATE %s \n" +
+                            "SET %s = %d,\n" +
+                            "WHERE %s = '%s';",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    1,
+                    DBContract.LoginEntry.COLUMN_NAME,
+                    "Joseph Traglia");
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(updateString1); //for writing
+
+            db.close();
+        }
+
+        public void deleteSqlLogins() {
+            String deleteString1 = String.format("DELETE FROM %s \n" +
+                            "WHERE %s = %d;",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    29);
+
+            String deleteString2 = String.format("DELETE FROM %s \n" +
+                            "WHERE %s = %d;",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    30);
+
+            String deleteString3 = String.format("DELETE FROM %s \n" +
+                            "WHERE %s = %d;",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    31);
+
+            String deleteString4 = String.format("DELETE FROM %s \n" +
+                            "WHERE %s = %d;",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    32);
+
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            db.execSQL(deleteString1);
+            db.execSQL(deleteString2);
+            db.execSQL(deleteString3);
+            db.execSQL(deleteString4);
+
+            db.close();
+        }
+
+
+        public void callSqlLogins() {
+            //INSERT INTO student (studentName, emailAddress, password)
+            //VALUES ('Joseph Traglia', 'jt9469@desales.edu', 'Desales12345')
+
+
+            String insertString1 = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
+                            "VALUES (%d, '%s', '%s', '%s')",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    DBContract.LoginEntry.COLUMN_NAME,
+                    DBContract.LoginEntry.COLUMN_EMAIL,
+                    DBContract.LoginEntry.COLUMN_PASSWORD,
+                    1,
+                    "Joseph Traglia",
+                    "jt9469@desales.edu",
+                    "12345");
+
+            String insertString2 = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
+                            "VALUES (%d, '%s', '%s', '%s')",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    DBContract.LoginEntry.COLUMN_NAME,
+                    DBContract.LoginEntry.COLUMN_EMAIL,
+                    DBContract.LoginEntry.COLUMN_PASSWORD,
+                    2,
+                    "Emanuel Luna",
+                    "el7027273@desales.edu",
+                    "12345");
+
+            String insertString3 = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
+                            "VALUES (%d, '%s', '%s', '%s')",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    DBContract.LoginEntry.COLUMN_NAME,
+                    DBContract.LoginEntry.COLUMN_EMAIL,
+                    DBContract.LoginEntry.COLUMN_PASSWORD,
+                    3,
+                    "Wyatt Giberson",
+                    "wg4655@desales.edu",
+                    "12345");
+
+            String insertString4 = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
+                            "VALUES (%d, '%s', '%s', '%s')",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    DBContract.LoginEntry.COLUMN_NAME,
+                    DBContract.LoginEntry.COLUMN_EMAIL,
+                    DBContract.LoginEntry.COLUMN_PASSWORD,
+                    4,
+                    "Luke Cossmann",
+                    "lc2027@desales.edu",
+                    "12345");
+
+            String insertString5 = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
+                            "VALUES (%d, '%s', '%s', '%s')",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    DBContract.LoginEntry.COLUMN_NAME,
+                    DBContract.LoginEntry.COLUMN_EMAIL,
+                    DBContract.LoginEntry.COLUMN_PASSWORD,
+                    5,
+                    "Austin Weaver",
+                    "aw3335@desales.edu",
+                    "12345");
+
+
+            String insertString6 = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
+                            "VALUES (%d, '%s', '%s', '%s')",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    DBContract.LoginEntry.COLUMN_NAME,
+                    DBContract.LoginEntry.COLUMN_EMAIL,
+                    DBContract.LoginEntry.COLUMN_PASSWORD,
+                    6,
+                    "Natalie Arner",
+                    "na8354@desales.edu",
+                    "12345");
+
+
+            String insertString7 = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
+                            "VALUES (%d, '%s', '%s', '%s')",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    DBContract.LoginEntry.COLUMN_NAME,
+                    DBContract.LoginEntry.COLUMN_EMAIL,
+                    DBContract.LoginEntry.COLUMN_PASSWORD,
+                    7,
+                    "Angel Negron",
+                    "an0807@desales.edu",
+                    "12345");
+
+            String insertString8 = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
+                            "VALUES (%d, '%s', '%s', '%s')",
+                    DBContract.LoginEntry.TABLE_NAME,
+                    DBContract.LoginEntry.COLUMN_ID,
+                    DBContract.LoginEntry.COLUMN_NAME,
+                    DBContract.LoginEntry.COLUMN_EMAIL,
+                    DBContract.LoginEntry.COLUMN_PASSWORD,
+                    8,
+                    "Samantha Rindgen",
+                    "sr9123@desales.edu",
+                    "12345");
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(insertString1); //for writing
+            db.execSQL(insertString2);
+            db.execSQL(insertString3);
+            db.execSQL(insertString4);
+            db.execSQL(insertString5);
+            db.execSQL(insertString6);
+            db.execSQL(insertString7);
+            db.execSQL(insertString8);
+
+            db.close();
+        }
+
+        public ArrayList<Login> fetchAllStudents() {
             ArrayList<Login> allStudents = new ArrayList<Login>();
 
             String selectAllString = "SELECT * FROM " + DBContract.LoginEntry.TABLE_NAME;
@@ -78,8 +241,7 @@ public class DBHelper {
             int passwordPos = cursor.getColumnIndex(DBContract.LoginEntry.COLUMN_PASSWORD);
 
             //Use positions to request the values in the columns
-            while (cursor.moveToNext())
-            {
+            while (cursor.moveToNext()) {
                 //Get information from current record
                 int id = cursor.getInt(idPos);
                 String name = cursor.getString(namePos);
@@ -103,36 +265,34 @@ public class DBHelper {
         private static final String DB_NAME = "messages.db";
         private static final int DB_VERSION = 1;
 
-        public MessageDBHelper(Context context)
-        {
+        public MessageDBHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
         }
 
         @Override
-        public void onCreate(SQLiteDatabase sqLiteDatabase)
-        {
+        public void onCreate(SQLiteDatabase sqLiteDatabase) {
             System.out.println(DBContract.MessageEntry.CREATE_MESSAGE_TABLE_CMD);
             sqLiteDatabase.execSQL(DBContract.MessageEntry.CREATE_MESSAGE_TABLE_CMD);
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1)
-        {
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
             sqLiteDatabase.execSQL(DBContract.MessageEntry.DROP_MESSAGE_TABLE_CMD);
             onCreate(sqLiteDatabase);
         }
 
-        public void saveMessage(int conversationID, String contents, String timestamp, int senderID)
-        {
+        public void saveMessage(int id, int conversationID, String contents, String timestamp, int senderID) {
             //INSERT INTO message (sender, recipient, contents)
             //VALUES (1249469, 1249123, 'Hey, how are you doing?')
-            String insertString = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
-                            "VALUES (%d, '%s', '%s', %d)",
+            String insertString = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) " +
+                            "VALUES (%d, %d, '%s', '%s', %d)",
                     DBContract.MessageEntry.TABLE_NAME,
+                    DBContract.MessageEntry.COLUMN_ID,
                     DBContract.MessageEntry.COLUMN_CONVERSATION_ID,
                     DBContract.MessageEntry.COLUMN_CONTENTS,
                     DBContract.MessageEntry.COLUMN_TIMESTAMP,
                     DBContract.MessageEntry.COLUMN_SENDER_ID,
+                    id,
                     conversationID,
                     contents,
                     timestamp,
@@ -146,8 +306,7 @@ public class DBHelper {
             db.close();
         }
 
-        public ArrayList<Message> fetchAllMessages()
-        {
+        public ArrayList<Message> fetchAllMessages() {
             ArrayList<Message> allMessages = new ArrayList<>();
 
             String selectAllString = "SELECT * FROM " + DBContract.MessageEntry.TABLE_NAME;
@@ -168,8 +327,7 @@ public class DBHelper {
 
 
             //Use positions to request the values in the columns
-            while (cursor.moveToNext())
-            {
+            while (cursor.moveToNext()) {
                 //Get information from current record
                 int id = cursor.getInt(idPos);
                 int conversationID = cursor.getInt(conversationIDPos);
@@ -185,6 +343,49 @@ public class DBHelper {
             return allMessages;
         }
 
+        public void addMessage()
+        {
+            int data = 1;
+            int data2 = 2;
+            String data1 = data + "0000" + 2;
+
+
+            String insertMessageString1 = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) " +
+                            "VALUES (%d, %d, '%s', '%s', %d)",
+                    DBContract.MessageEntry.TABLE_NAME,
+                    DBContract.MessageEntry.COLUMN_ID,
+                    DBContract.MessageEntry.COLUMN_CONVERSATION_ID,
+                    DBContract.MessageEntry.COLUMN_CONTENTS,
+                    DBContract.MessageEntry.COLUMN_TIMESTAMP,
+                    DBContract.MessageEntry.COLUMN_SENDER_ID,
+                    1,
+                    10002,
+                    "Hi Manny",
+                    "10:00",
+                    0);
+
+            String insertMessageString2 = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) " +
+                            "VALUES (%d, %d, '%s', '%s', %d)",
+                    DBContract.MessageEntry.TABLE_NAME,
+                    DBContract.MessageEntry.COLUMN_ID,
+                    DBContract.MessageEntry.COLUMN_CONVERSATION_ID,
+                    DBContract.MessageEntry.COLUMN_CONTENTS,
+                    DBContract.MessageEntry.COLUMN_TIMESTAMP,
+                    DBContract.MessageEntry.COLUMN_SENDER_ID,
+                    2,
+                    10002,
+                    "How are you?",
+                    "10:01",
+                    0);
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(insertMessageString1);
+            db.execSQL(insertMessageString2);
+
+            db.close();
+
+        }
+
     }
 
     /**
@@ -198,27 +399,23 @@ public class DBHelper {
         DBHelper.MessageDBHelper messageDBHelper = new DBHelper.MessageDBHelper(context);
         DBHelper.LoginDBHelper studentDBHelper = new DBHelper.LoginDBHelper(context);
 
-        public ConversationDBHelper(Context context)
-        {
+        public ConversationDBHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
         }
 
         @Override
-        public void onCreate(SQLiteDatabase sqLiteDatabase)
-        {
+        public void onCreate(SQLiteDatabase sqLiteDatabase) {
             System.out.println(DBContract.ConversationEntry.CREATE_CONVERSATION_TABLE_CMD);
             sqLiteDatabase.execSQL(DBContract.ConversationEntry.CREATE_CONVERSATION_TABLE_CMD);
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1)
-        {
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
             sqLiteDatabase.execSQL(DBContract.ConversationEntry.DROP_CONVERSATION_TABLE_CMD);
             onCreate(sqLiteDatabase);
         }
 
-        public void saveConversation(int student1ID, int student2ID, int imageID, String timestamp, String lastMessageSent)
-        {
+        public void saveConversation(int student1ID, int student2ID, int imageID, String timestamp, String lastMessageSent) {
             //INSERT INTO message (int conversationId, String person1, String person2)
             //VALUES (, , 'Hey, how are you doing?')
             String insertString = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) " +
@@ -243,10 +440,9 @@ public class DBHelper {
             db.close();
         }
 
-        public ArrayList<Conversation> fetchAllConversations()
-        {
-            messageDBHelper.fetchAllMessages();
-            studentDBHelper.fetchAllStudents();
+        public ArrayList<Conversation> fetchAllConversations() {
+//            messageDBHelper.fetchAllMessages();
+//            studentDBHelper.fetchAllStudents();
 
             ArrayList<Conversation> allConversations = new ArrayList<>();
 
@@ -270,10 +466,8 @@ public class DBHelper {
             int lastMessageSentPos = cursor.getColumnIndex(DBContract.ConversationEntry.COLUMN_LAST_MESSAGE_SENT);
 
 
-
             //Use positions to request the values in the columns
-            while (cursor.moveToNext())
-            {
+            while (cursor.moveToNext()) {
                 //Get information from current record
                 int id = cursor.getInt(idPos);
                 int student1ID = cursor.getInt(student1IDPos);
@@ -289,6 +483,28 @@ public class DBHelper {
             cursor.close();
             db.close();
             return allConversations;
+        }
+
+        public void insertConversation()
+        {
+            String insertConversationString1 = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) " +
+                            "VALUES (%d, %d, %d, '%s', '%s')",
+                    DBContract.ConversationEntry.TABLE_NAME,
+                    DBContract.ConversationEntry.COLUMN_STUDENT_1_ID,
+                    DBContract.ConversationEntry.COLUMN_STUDENT_2_ID,
+                    DBContract.ConversationEntry.COLUMN_IMAGE_ID,
+                    DBContract.ConversationEntry.COLUMN_TIMESTAMP,
+                    DBContract.ConversationEntry.COLUMN_LAST_MESSAGE_SENT,
+                    1,
+                    2,
+                    700002,
+                    "10:01",
+                    "How are you?");
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(insertConversationString1);
+
+            db.close();
         }
 
 

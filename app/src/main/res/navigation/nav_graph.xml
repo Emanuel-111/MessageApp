@@ -20,9 +20,6 @@
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" >
         <argument
-            android:name="studentId"
-            app:argType="long" />
-        <argument
             android:name="conversationId"
             app:argType="long" />
     </fragment>

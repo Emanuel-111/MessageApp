@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         View view = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.conversation_row_item, parent, false);
 
+        System.out.println("DONE CREATING A SINGLE ROW'S VIEW");
+
         return new ConversationViewHolder(view);
     }
 
@@ -43,28 +46,24 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         holder.setData(conversation, position);
 
+        System.out.println("DONE POPULATING ROW: " +  position +  " "  + conversation.getStudent1ID());
+
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return conversations.size();
     }
 
     class ConversationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
 
-        private ImageView profilePicture;
-        private TextView person1;
-        private TextView person2;
+        private int currentPosition = -1;
         private Conversation currentConversation = null;
 
         public ConversationViewHolder(@NonNull View itemView) {
             super(itemView);
-
-           profilePicture =  itemView.findViewById(R.id.imv_StudentPicture);
-           person1 = itemView.findViewById(R.id.tv_StudentName);
-           person2 = itemView.findViewById(R.id.tv_StudentName);
 
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
@@ -72,18 +71,27 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         public void setData(Conversation c, int position )
         {
-            profilePicture.setImageResource(R.drawable.default_profile_image);
-
-            currentPositionInList = position;
             currentConversation = c;
+            currentPosition = position;
+
+            TextView tv_name1 = itemView.findViewById(R.id.tv_StudentName);
+            tv_name1.setText((c.getStudent1ID() + ""));
+
+            TextView recentMessage = itemView.findViewById(R.id.tv_RecentMessage);
+            recentMessage.setText(c.getLastMessageSent());
+
+            ImageView profilePicture = itemView.findViewById(R.id.imv_StudentPicture);
+            profilePicture.setImageResource(R.drawable.default_profile_image);
 
         }
 
-
-
-
         @Override
         public void onClick(View v) {
+
+            ConversationFragmentDirections.ActionConversationFragmentToMessageFragment action =
+                    ConversationFragmentDirections.actionConversationFragmentToMessageFragment((currentConversation.getId()));
+
+            Navigation.findNavController(itemView).navigate(action);
 
         }
     }

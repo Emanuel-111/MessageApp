@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +23,10 @@ public class LoginFragment extends Fragment {
     private EditText etvPassword;
     private Button btnLogin;
     private DBHelper.LoginDBHelper loginDBHelper;
+    private DBHelper.MessageDBHelper messageDBHelper;
+    private DBHelper.ConversationDBHelper convDBHelper;
+
+    private ImageView imageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +36,8 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         loginDBHelper = new DBHelper.LoginDBHelper(getContext());
+        messageDBHelper = new DBHelper.MessageDBHelper(getContext());
+        convDBHelper = new DBHelper.ConversationDBHelper(getContext());
 
         // Fill the arrayList with the logins
         ArrayList<Login> allLogins = loginDBHelper.fetchAllStudents();
@@ -43,7 +50,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                allLogins.add(loginDBHelper.saveLogin();)
+
 
                 String emailAddress = etvEmailAddress.getText().toString();
                 String password = etvPassword.getText().toString();
@@ -57,6 +64,12 @@ public class LoginFragment extends Fragment {
                             LoginFragmentDirections.ActionLoginFragmentToConversationFragment action =
                                     LoginFragmentDirections.actionLoginFragmentToConversationFragment(allLogins.get(i).getId());
 
+                            Navigation.findNavController(view).navigate(action);
+
+                        }
+
+                        else
+                        {
 
                         }
                     }

@@ -38,10 +38,10 @@ public class DBContract {
         class MessageEntry implements BaseColumns
         {
             public static final String TABLE_NAME = "messages";
-            public static final String COLUMN_CONVERSATION_ID = "conversation ID";
+            public static final String COLUMN_CONVERSATION_ID = "conversation";
             public static final String COLUMN_CONTENTS = "contents";
             public static final String COLUMN_TIMESTAMP = "timestamp";
-            public static final String COLUMN_SENDER_ID = "sender ID";
+            public static final String COLUMN_SENDER_ID = "sender";
             public static final String COLUMN_ID = _ID;
 
             public static final String CREATE_MESSAGE_TABLE_CMD = "CREATE TABLE " + TABLE_NAME +
@@ -55,11 +55,11 @@ public class DBContract {
         class ConversationEntry implements BaseColumns
         {
             public static final String TABLE_NAME = "conversations";
-            public static final String COLUMN_STUDENT_1_ID = "student 1 ID";
-            public static final String COLUMN_STUDENT_2_ID = "student 2 ID";
-            public static final String COLUMN_IMAGE_ID = "image ID";
+            public static final String COLUMN_STUDENT_1_ID = "student1_ID";
+            public static final String COLUMN_STUDENT_2_ID = "student2_ID";
+            public static final String COLUMN_IMAGE_ID = "image_ID";
             public static final String COLUMN_TIMESTAMP = "timestamp";
-            public static final String COLUMN_LAST_MESSAGE_SENT = "last message sent";
+            public static final String COLUMN_LAST_MESSAGE_SENT = "last";
             public static final String COLUMN_ID = _ID;
 
             public static final String CREATE_CONVERSATION_TABLE_CMD = "CREATE TABLE " + TABLE_NAME +
