@@ -50,8 +50,6 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-
                 String emailAddress = etvEmailAddress.getText().toString();
                 String password = etvPassword.getText().toString();
 

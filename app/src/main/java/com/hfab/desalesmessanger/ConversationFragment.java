@@ -26,7 +26,7 @@ public class ConversationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_conversation, container, false);
 
-        //long studentId = ConversationFragmentArgs.fromBundle(savedInstanceState).getStudentId();
+        long studentId = ConversationFragmentArgs.fromBundle(savedInstanceState).getStudentId();
 
         RecyclerView rv = view.findViewById(R.id.rv_conversations);
         Context context = getContext();
