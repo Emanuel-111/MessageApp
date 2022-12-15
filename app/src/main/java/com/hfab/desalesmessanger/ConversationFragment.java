@@ -18,7 +18,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 
+
+
 public class ConversationFragment extends Fragment {
+
+    private ArrayList<Conversation> conversations;
+    private ArrayList<Conversation> specificConversation;
+    private DBHelper.ConversationDBHelper convDBHelper;
+
+    private FloatingActionButton fabSettings;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,15 +34,17 @@ public class ConversationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_conversation, container, false);
 
-        DBHelper.ConversationDBHelper convDBHelper = new DBHelper.ConversationDBHelper(getContext());
-        ArrayList<Conversation> conversations = convDBHelper.fetchAllConversations();
+        convDBHelper = new DBHelper.ConversationDBHelper(getContext());
 
-        ArrayList<Conversation> specificConversation = new ArrayList<Conversation>();
+        conversations = convDBHelper.fetchAllConversations();
+        specificConversation = new ArrayList<Conversation>();
 
         String id = ConversationFragmentArgs.fromBundle(requireArguments()).getStudentId();
 
         int studentId = Integer.parseInt(id);
 
+        // If the id from the login matches the conversation's studentId
+        // Show all conversations from that user specifically
         for (int i = 0; i < conversations.size(); i++)
         {
             if (conversations.get(i).getStudent1ID() == studentId)
@@ -43,10 +53,17 @@ public class ConversationFragment extends Fragment {
             }
         }
 
-        RecyclerView rv = view.findViewById(R.id.rv_conversations);
-        Context context = getContext();
+        fabSettings = view.findViewById(R.id.fab_settings);
 
-        //FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
+        fabSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        RecyclerView rv = view.findViewById(R.id.rv_conversations);
+
         FragmentManager fm = getChildFragmentManager();
 
         //adapter

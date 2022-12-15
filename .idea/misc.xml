@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2916666666666667" />
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.2916666666666667" />
         <entry key="app/src/main/res/layout/fragment_messages.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.2916666666666667" />
         <entry key="app/src/main/res/layout/message_recieved_item.xml" value="0.2916666666666667" />
         <entry key="app/src/main/res/layout/message_sent_item.xml" value="0.2916666666666667" />
         <entry key="app/src/main/res/layout/rounded_corner.xml" value="0.2916666666666667" />

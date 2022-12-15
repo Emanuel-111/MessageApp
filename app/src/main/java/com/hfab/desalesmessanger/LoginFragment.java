@@ -39,6 +39,10 @@ public class LoginFragment extends Fragment {
         messageDBHelper = new DBHelper.MessageDBHelper(getContext());
         convDBHelper = new DBHelper.ConversationDBHelper(getContext());
 
+        // DO NOT DELETE,
+        // When you run the app for the first time, uncomment these lines
+        // then comment them again to show the databases
+
         /*loginDBHelper.callSqlLogins();
         messageDBHelper.addMessage();
         convDBHelper.insertConversation();*/
