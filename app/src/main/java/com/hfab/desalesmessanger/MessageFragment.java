@@ -27,6 +27,9 @@ public class MessageFragment extends Fragment {
     private DBHelper.MessageDBHelper messageDBHelper;
     private Context context;
     private View view;
+    private ArrayList<Message> messages;
+    private ArrayList<Message> specifcMessages;
+    long conversationId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,16 +40,18 @@ public class MessageFragment extends Fragment {
         super.onCreate(savedInstanceState);
         imvSend = view.findViewById(R.id.imvSend);
         newMessage = view.findViewById(R.id.etMessage);
+
+
+
         imvSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context = getContext();
-                messageDBHelper = new DBHelper.MessageDBHelper(context);
-                ArrayList<Message> messages;
-                messages = messageDBHelper.fetchAllMessages();
+
+
                 Calendar c = Calendar.getInstance();
                 String timeComp = c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE);
-                messages.add(new Message(1, 2, newMessage.getText().toString(),timeComp, Message.TYPE_SENT));
+                specifcMessages.add(new Message(specifcMessages.size() + 1, (int) conversationId, newMessage.getText().toString(),timeComp, Message.TYPE_SENT));
+
                 hideKeyboard(view);
             }
             private void hideKeyboard(View view) {
@@ -62,11 +67,28 @@ public class MessageFragment extends Fragment {
 
     private void setUpRecyclerView(){
 
+        conversationId = MessageFragmentArgs.fromBundle(requireArguments()).getConversationId();
+
+        context = getContext();
+        messageDBHelper = new DBHelper.MessageDBHelper(context);
+
+        messages = messageDBHelper.fetchAllMessages();
+        specifcMessages = new ArrayList<Message>();
+
+
+        for (int i = 0; i < messages.size(); i++)
+        {
+            if (messages.get(i).getConversationID() == conversationId)
+            {
+                specifcMessages.add(messages.get(i));
+            }
+        }
+
         RecyclerView rv = view.findViewById(R.id.rv_message);
         FragmentManager fm = getParentFragmentManager();
 
         //adapter
-        MessageAdapter adapter = new MessageAdapter(fm, getContext());
+        MessageAdapter adapter = new MessageAdapter(fm, getContext(), specifcMessages);
         rv.setAdapter(adapter);
 
         //manager connects the above 2

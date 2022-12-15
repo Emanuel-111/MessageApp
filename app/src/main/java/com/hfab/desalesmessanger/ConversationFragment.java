@@ -26,7 +26,22 @@ public class ConversationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_conversation, container, false);
 
-        long studentId = ConversationFragmentArgs.fromBundle(savedInstanceState).getStudentId();
+        DBHelper.ConversationDBHelper convDBHelper = new DBHelper.ConversationDBHelper(getContext());
+        ArrayList<Conversation> conversations = convDBHelper.fetchAllConversations();
+
+        ArrayList<Conversation> specificConversation = new ArrayList<Conversation>();
+
+        String id = ConversationFragmentArgs.fromBundle(requireArguments()).getStudentId();
+
+        int studentId = Integer.parseInt(id);
+
+        for (int i = 0; i < conversations.size(); i++)
+        {
+            if (conversations.get(i).getStudent1ID() == studentId)
+            {
+                specificConversation.add(conversations.get(i));
+            }
+        }
 
         RecyclerView rv = view.findViewById(R.id.rv_conversations);
         Context context = getContext();
@@ -34,12 +49,8 @@ public class ConversationFragment extends Fragment {
         //FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
         FragmentManager fm = getChildFragmentManager();
 
-        DBHelper.ConversationDBHelper convDBHelper = new DBHelper.ConversationDBHelper(getContext());
-
-        ArrayList<Conversation> conversations = convDBHelper.fetchAllConversations();
-
         //adapter
-        ConversationAdapter adapter = new ConversationAdapter(fm, conversations);
+        ConversationAdapter adapter = new ConversationAdapter(fm, specificConversation);
         rv.setAdapter(adapter);
 
         //manager connects the above 2

@@ -30,9 +30,10 @@
         tools:layout="@layout/fragment_conversation" >
         <argument
             android:name="studentId"
-            app:argType="long" />
+            app:argType="string" />
         <action
             android:id="@+id/action_conversationFragment_to_messageFragment"
-            app:destination="@id/messageFragment" />
+            app:destination="@id/messageFragment"
+            app:popUpTo="@id/conversationFragment" />
     </fragment>
 </navigation>

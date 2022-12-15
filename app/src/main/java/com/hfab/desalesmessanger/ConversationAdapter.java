@@ -74,8 +74,19 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             currentConversation = c;
             currentPosition = position;
 
+            DBHelper.LoginDBHelper dbHelper = new DBHelper.LoginDBHelper(itemView.getContext());
+            ArrayList<Login> loginNames = dbHelper.fetchAllStudents();
+
             TextView tv_name1 = itemView.findViewById(R.id.tv_StudentName);
-            tv_name1.setText((c.getStudent1ID() + ""));
+
+            for (int i = 0; i < loginNames.size(); i++)
+            {
+                if ((i+1) == c.getStudent2ID())
+                {
+                    tv_name1.setText((loginNames.get(i).getStudentName() + ""));
+                }
+            }
+
 
             TextView recentMessage = itemView.findViewById(R.id.tv_RecentMessage);
             recentMessage.setText(c.getLastMessageSent());
@@ -89,7 +100,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         public void onClick(View v) {
 
             ConversationFragmentDirections.ActionConversationFragmentToMessageFragment action =
-                    ConversationFragmentDirections.actionConversationFragmentToMessageFragment((currentConversation.getId()));
+                    ConversationFragmentDirections.actionConversationFragmentToMessageFragment((currentConversation.getConversationID()));
 
             Navigation.findNavController(itemView).navigate(action);
 

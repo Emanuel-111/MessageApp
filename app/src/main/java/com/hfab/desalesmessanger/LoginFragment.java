@@ -39,6 +39,10 @@ public class LoginFragment extends Fragment {
         messageDBHelper = new DBHelper.MessageDBHelper(getContext());
         convDBHelper = new DBHelper.ConversationDBHelper(getContext());
 
+        /*loginDBHelper.callSqlLogins();
+        messageDBHelper.addMessage();
+        convDBHelper.insertConversation();*/
+
         // Fill the arrayList with the logins
         ArrayList<Login> allLogins = loginDBHelper.fetchAllStudents();
 
@@ -60,21 +64,22 @@ public class LoginFragment extends Fragment {
                         if(password.equals(allLogins.get(i).getPassword()))
                         {
                             LoginFragmentDirections.ActionLoginFragmentToConversationFragment action =
-                                    LoginFragmentDirections.actionLoginFragmentToConversationFragment(allLogins.get(i).getId());
+                                    LoginFragmentDirections.actionLoginFragmentToConversationFragment("" + allLogins.get(i).getId());
 
                             Navigation.findNavController(view).navigate(action);
+                            break;
 
                         }
 
                         else
                         {
-
+                                Toast.makeText(getContext(), "Password is incorrect", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     else
                     {
-
+                        Toast.makeText(getContext(), "Email is incorrect", Toast.LENGTH_SHORT).show();
                     }
                 }
 
