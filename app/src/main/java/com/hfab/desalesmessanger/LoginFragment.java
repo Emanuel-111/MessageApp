@@ -1,5 +1,6 @@
 package com.hfab.desalesmessanger;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ public class LoginFragment extends Fragment {
     private DBHelper.ConversationDBHelper convDBHelper;
     private ArrayList<Login> allLogins;
     private Toast toast;
+    private SQLiteDatabase db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,14 +42,23 @@ public class LoginFragment extends Fragment {
         messageDBHelper = new DBHelper.MessageDBHelper(getContext());
         convDBHelper = new DBHelper.ConversationDBHelper(getContext());
 
-        /*
-        DO NOT DELETE,
-        When you run the app for the first time, uncomment these lines
-        then comment them again to show the databases
+        // If the database does not exist in the project or app it will add and fill the database
+        // Otherwise, it will skip.
+        try {
+            db = SQLiteDatabase.openDatabase(getContext().getDatabasePath("logins.db").toString(), null, SQLiteDatabase.OPEN_READONLY);
+        }
 
-        loginDBHelper.callSqlLogins();
-        messageDBHelper.addMessage();
-        convDBHelper.insertConversation();*/
+        catch (Exception e)
+        {
+
+        }
+
+        if (db == null)
+        {
+            loginDBHelper.callSqlLogins();
+            messageDBHelper.addMessage();
+            convDBHelper.insertConversation();
+        }
 
         // Fill the arrayList with the logins
         allLogins = loginDBHelper.fetchAllStudents();
@@ -98,4 +109,14 @@ public class LoginFragment extends Fragment {
 
         return view;
     }
+
+   /* @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        loginDBHelper.deleteSqlLogins();
+        messageDBHelper.deleteSQLMessages();
+        convDBHelper.deleteSQLConversations();
+
+    }*/
 }

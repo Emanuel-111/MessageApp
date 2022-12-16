@@ -118,38 +118,13 @@ public class DBHelper {
          * This method deletes a students information within the SQLite database.
          */
         public void deleteSqlLogins() {
-            String deleteString1 = String.format("DELETE FROM %s \n" +
-                            "WHERE %s = %d;",
-                    DBContract.LoginEntry.TABLE_NAME,
-                    DBContract.LoginEntry.COLUMN_ID,
-                    29);
-
-            String deleteString2 = String.format("DELETE FROM %s \n" +
-                            "WHERE %s = %d;",
-                    DBContract.LoginEntry.TABLE_NAME,
-                    DBContract.LoginEntry.COLUMN_ID,
-                    30);
-
-            String deleteString3 = String.format("DELETE FROM %s \n" +
-                            "WHERE %s = %d;",
-                    DBContract.LoginEntry.TABLE_NAME,
-                    DBContract.LoginEntry.COLUMN_ID,
-                    31);
-
-            String deleteString4 = String.format("DELETE FROM %s \n" +
-                            "WHERE %s = %d;",
-                    DBContract.LoginEntry.TABLE_NAME,
-                    DBContract.LoginEntry.COLUMN_ID,
-                    32);
+            String deleteLogins = DBContract.LoginEntry.DROP_LOGIN_TABLE_CMD;
 
             SQLiteDatabase db = this.getWritableDatabase();
-
-            db.execSQL(deleteString1);
-            db.execSQL(deleteString2);
-            db.execSQL(deleteString3);
-            db.execSQL(deleteString4);
+            db.execSQL(deleteLogins);
 
             db.close();
+
         }
 
         /**
@@ -361,6 +336,7 @@ public class DBHelper {
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
             sqLiteDatabase.execSQL(DBContract.MessageEntry.DROP_MESSAGE_TABLE_CMD);
             onCreate(sqLiteDatabase);
+            addMessage();
         }
 
         /**
@@ -396,6 +372,17 @@ public class DBHelper {
             db.execSQL(insertString); //for writing
 
             db.close();
+        }
+
+        public void deleteSQLMessages()
+        {
+            String deleteSQLMessages = DBContract.MessageEntry.DROP_MESSAGE_TABLE_CMD;
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(deleteSQLMessages); //for writing
+
+            db.close();
+
         }
 
         /**
@@ -1975,6 +1962,7 @@ public class DBHelper {
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
             System.out.println(DBContract.ConversationEntry.CREATE_CONVERSATION_TABLE_CMD);
             sqLiteDatabase.execSQL(DBContract.ConversationEntry.CREATE_CONVERSATION_TABLE_CMD);
+
         }
 
         /**
@@ -2028,6 +2016,17 @@ public class DBHelper {
 
             db.close();
         }
+
+        public void deleteSQLConversations()
+        {
+            String deleteSQLConversations = DBContract.ConversationEntry.DROP_CONVERSATION_TABLE_CMD;
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(deleteSQLConversations); //for writing
+
+            db.close();
+        }
+
 
         /**
          * fetchAllConversations
