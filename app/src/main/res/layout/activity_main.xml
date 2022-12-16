@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--**
+* activity_main.xml allows for a navigating between fragments
+*
+* @author Emanuel Luna, Joseph Traglia, and Wyatt Giberson
+-->
 <androidx.fragment.app.FragmentContainerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
