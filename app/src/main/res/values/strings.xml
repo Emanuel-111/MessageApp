@@ -1,14 +1,25 @@
 <resources>
-    <string name="app_name">DeSales Messanger</string>
+    <string name="app_name">DeSales Messenger</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings_name">Settings</string>
     <string name="background_color_name">Background Color</string>
+    <string name="write_a_message">Write a message</string>
+    <string name="_11_00">11:00</string>
+    <string name="test1">This is a test I lov apple and cardy so much its my favoirte treat</string>
+    <string name="_11_00_">11:00</string>
+    <string name="test2">This is a test I love apple and candy so much its my favoirte treat</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="student_name">Student Name</string>
+    <string name="recent_message">Recent Message</string>
+    <string name="todo">TODO</string>
 
-    <string-array name="background_color_choices">
-        <item>Grey</item>
-        <item>Blue</item>
-        <item>Red</item>
-        <item>White</item>
-    </string-array>
+    <string name="btn_gray">Gray</string>
+    <string name="btn_blue">Blue</string>
+    <string name="btn_red">Red</string>
+    <string name="btn_white">White</string>
+
+    <string name="btn_done">Done</string>
 
 </resources>

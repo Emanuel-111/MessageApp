@@ -1,5 +1,10 @@
 package com.hfab.desalesmessanger;
 
+/**
+ * @author Emanuel Luna
+ * Login (class) - represents the login information that the
+ * user must enter correctly before accessing their conversations
+ */
 public class Login {
 
     private String emailAddress;
@@ -7,54 +12,98 @@ public class Login {
     private String studentName;
     private int id;
 
-    public Login(int id, String studentName, String emailAddress, String password)
-    {
+    /**
+     * Login - creates a new Login instance
+     *
+     * @param id           - id of the new Login instance
+     * @param studentName  - the student name
+     * @param emailAddress - the email address
+     * @param password     - the password
+     */
+    public Login(int id, String studentName, String emailAddress, String password) {
         this.id = id;
         this.emailAddress = emailAddress;
         this.password = password;
         this.studentName = studentName;
     }
 
-    public int getId()
-    {
+    /**
+     * getId - returns the id of the Login
+     *
+     * @return id
+     */
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    /**
+     * setId - sets the id of the Login
+     *
+     * @param id - id
+     */
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getEmailAddress()
-    {
+    /**
+     * getEmailAddress - gets the email address of the Login
+     *
+     * @return emailAddress
+     */
+    public String getEmailAddress() {
         return emailAddress;
     }
 
-    public void setEmailAddress(String emailAddress)
-    {
+    /**
+     * setEmailAddress - sets the emailAddress of the Login
+     *
+     * @param emailAddress - emailAddress
+     */
+    public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
 
-    public String getPassword()
-    {
+    /**
+     * getPassword - gets the password of the Login
+     *
+     * @return password
+     */
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password)
-    {
+    /**
+     * setPassword - sets the password of the Login
+     *
+     * @param password - password
+     */
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getStudentName()
-    {
+    /**
+     * getStudentName - gets the student name of the Login
+     *
+     * @return studentName
+     */
+    public String getStudentName() {
         return studentName;
     }
 
-    public void setStudentName(String studentName)
-    {
+    /**
+     * setStudentName - sets the student name of the Login
+     *
+     * @param studentName - student name
+     */
+    public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
 
+    /**
+     * toString - displays information of the Login
+     *
+     * @return the string that contains information of the Login
+     */
     @Override
     public String toString() {
         return "Login{" +

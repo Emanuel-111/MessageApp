@@ -1,5 +1,12 @@
 package com.hfab.desalesmessanger;
 
+/**
+ * Conversation.java
+ * This class represents the conversation information for each conversation within the
+ * messenger application.
+ *
+ * @author Joseph Traglia
+ */
 public class Conversation {
 
     private int id; // Column Id
@@ -11,18 +18,19 @@ public class Conversation {
     private String lastMessageSent; // The last message that was sent per conversation
 
     /**
-     * The Conversation constructor represents the unique identifier for the conversation,
+     * Conversation
+     * This constructor represents the unique identifier for the conversation,
      * the IDs of the two students participating in the conversation,
      * the ID of the image associated with the conversation,
      * the timestamp for when the conversation was created,
      * and the last message that was sent in the conversation.
      *
-     * @param id - Column Id
-     * @param conversationID - conversationID
-     * @param student1ID - Student 1 Id
-     * @param student2ID - Student 2 Id
-     * @param imageID - Image Id to associate with profile picture
-     * @param timestamp - The time associated with the last message sent
+     * @param id              - Column Id
+     * @param conversationID  - conversationID
+     * @param student1ID      - Student 1 Id
+     * @param student2ID      - Student 2 Id
+     * @param imageID         - Image Id to associate with profile picture
+     * @param timestamp       - The time associated with the last message sent
      * @param lastMessageSent - The last message that was sent per conversation
      */
     public Conversation(int id, int conversationID, int student1ID, int student2ID, int imageID, String timestamp, String lastMessageSent) {
@@ -36,38 +44,49 @@ public class Conversation {
     }
 
     /**
-     * getId - grabs the column id
+     * getId
+     * Gets the conversation's ID.
+     *
+     * @return id.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * setId - sets the column id
-     * @param id
+     * setId
+     * Sets the conversation's ID.
+     *
+     * @param id The conversation's ID.
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * getConversationID - gets the conversationID
-     * @return conversationID
+     * getConversationID
+     * Gets the conversationID.
+     *
+     * @return conversationID.
      */
     public int getConversationID() {
         return conversationID;
     }
 
     /**
-     * setConversationID - sets the conversationID
-     * @param conversationID
+     * setConversationID
+     * Sets the conversationID.
+     *
+     * @param conversationID The conversationID.
      */
     public void setConversationID(int conversationID) {
         this.conversationID = conversationID;
     }
 
     /**
-     * getStudent1ID - gets the student 1's id
+     * getStudent1ID
+     * Gets student 1's ID.
+     *
      * @return student1ID
      */
     public int getStudent1ID() {
@@ -75,47 +94,59 @@ public class Conversation {
     }
 
     /**
-     * setStudent1ID - sets the student 1's Id
-     * @param student1ID
+     * setStudent1ID
+     * Sets the student 1's ID.
+     *
+     * @param student1ID Student 1's ID.
      */
     public void setStudent1ID(int student1ID) {
         this.student1ID = student1ID;
     }
 
     /**
-     * getStudent2ID - gets the student 2's Id
-     * @return
+     * getStudent2ID
+     * Gets the student 2's ID.
+     *
+     * @return student2ID
      */
     public int getStudent2ID() {
         return student2ID;
     }
 
     /**
-     * setStudent2Id - sets the student's 2's Id
-     * @param student2ID
+     * setStudent2Id
+     * Sets the student's 2's ID.
+     *
+     * @param student2ID Student 2's ID.
      */
     public void setStudent2ID(int student2ID) {
         this.student2ID = student2ID;
     }
 
     /**
-     * getImageID - gets the image identifier
-     * @return
+     * getImageID
+     * Gets the image identifier.
+     *
+     * @return imageID
      */
     public int getImageID() {
         return imageID;
     }
 
     /**
-     * setImageID - sets the image identifier
-     * @param imageID
+     * setImageID
+     * Sets the image identifier.
+     *
+     * @param imageID The image identifier.
      */
     public void setImageID(int imageID) {
         this.imageID = imageID;
     }
 
     /**
-     * getTimestamp - gets the time the last message was sent
+     * getTimestamp
+     * Gets the time the last message was sent.
+     *
      * @return timestamp
      */
     public String getTimestamp() {
@@ -123,15 +154,19 @@ public class Conversation {
     }
 
     /**
-     * setTimestamp - sets the time the last message was sent
-     * @param timestamp
+     * setTimestamp
+     * Sets the time the last message was sent.
+     *
+     * @param timestamp The time the last message was sent.
      */
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
     /**
-     * getLastMessageSent - gets the last message the user was sent
+     * getLastMessageSent
+     * Gets the last message the user sent.
+     *
      * @return lastMessageSent
      */
     public String getLastMessageSent() {
@@ -139,16 +174,20 @@ public class Conversation {
     }
 
     /**
-     * setLastMessageSent - sets the last message the user was sent
-     * @param lastMessageSent
+     * setLastMessageSent
+     * Sets the last message the user sent.
+     *
+     * @param lastMessageSent The last message the user sent.
      */
     public void setLastMessageSent(String lastMessageSent) {
         this.lastMessageSent = lastMessageSent;
     }
 
     /**
-     * Conversation toString - Shows all information about the conversation
-     * @return
+     * toString
+     * Prints the Conversation class's fields with their current values.
+     *
+     * @return The Conversation's fields in a String.
      */
     @Override
     public String toString() {

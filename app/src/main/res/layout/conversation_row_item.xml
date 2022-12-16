@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--/**
+*  The conversation_row_item.xml file contains the elements and attributes associated with
+*  each conversation in the application's CardView. This fragment contains a ConstraintLayout
+*  with a TextView and ImageView inside a CardView.
+*
+*  @author Joseph Traglia
+*
+*/-->
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="167dp"
-            android:text="Student Name"
+            android:text="@string/student_name"
             android:textColor="#676767"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_RecentMessage"
@@ -34,7 +42,7 @@
             android:id="@+id/tv_RecentMessage"
             android:layout_width="0dp"
             android:layout_height="59dp"
-            android:text="Recent Message"
+            android:text="@string/recent_message"
             android:textColor="#888888"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -44,16 +52,16 @@
         <ImageView
             android:id="@+id/imv_StudentPicture"
             android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginEnd="23dp"
+            android:contentDescription="TODO"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_StudentName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            tools:srcCompat="@drawable/default_profile_image"
-            android:layout_height="0dp"
-            android:contentDescription="TODO" />
+            tools:srcCompat="@drawable/default_profile_image" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

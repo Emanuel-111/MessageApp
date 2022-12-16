@@ -7,32 +7,71 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+/**
+ * DBHelper.java
+ * This class represents the messenger app's database helper for inserting, updating,
+ * and deleting various SQL queries within the program.
+ *
+ * @author Joseph Traglia
+ */
 public class DBHelper {
 
     /**
+     * LoginDBHelper
+     * This class represents the messenger app's login database helper for inserting, updating,
+     * and deleting various SQL queries within the program.
      *
+     * @author Joseph Traglia
      */
     static class LoginDBHelper extends SQLiteOpenHelper {
 
         private static final String DB_NAME = "logins.db";
         private static final int DB_VERSION = 1;
 
+        /**
+         * LoginDBHelper
+         * This constructor is utilized for the LoginDBHelper class.
+         *
+         * @param context Context for the LoginDBHelper.
+         */
         public LoginDBHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
         }
 
+        /**
+         * onCreate
+         * This method creates the SQLite database.
+         *
+         * @param sqLiteDatabase Database table being created.
+         */
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
             System.out.println(DBContract.LoginEntry.CREATE_LOGIN_TABLE_CMD);
             sqLiteDatabase.execSQL(DBContract.LoginEntry.CREATE_LOGIN_TABLE_CMD);
         }
 
+        /**
+         * onUpgrade
+         * This method drops the SQLite database.
+         *
+         * @param sqLiteDatabase Database table being dropped.
+         * @param i              First cursor location.
+         * @param i1             Second cursor location.
+         */
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
             sqLiteDatabase.execSQL(DBContract.LoginEntry.DROP_LOGIN_TABLE_CMD);
             onCreate(sqLiteDatabase);
         }
 
+        /**
+         * saveLogin
+         * This method saves the logins for each student in the SQLite database.
+         *
+         * @param studentName  The Student's name.
+         * @param emailAddress The Student's email address.
+         * @param password     The Student's password.
+         */
         public void saveLogin(String studentName, String emailAddress, String password) {
             //INSERT INTO student (student ID, name, email, password)
             // VALUES (1249469, 'Joseph Traglia', 'jt9469@desales.edu', 'Desales12345')
@@ -54,6 +93,10 @@ public class DBHelper {
             db.close();
         }
 
+        /**
+         * updateSqlLogins
+         * This method updates a students information within the SQLite database.
+         */
         public void updateSqlLogins() {
             String updateString1 = String.format("UPDATE %s \n" +
                             "SET %s = %d,\n" +
@@ -70,6 +113,10 @@ public class DBHelper {
             db.close();
         }
 
+        /**
+         * deleteSqlLogins
+         * This method deletes a students information within the SQLite database.
+         */
         public void deleteSqlLogins() {
             String deleteString1 = String.format("DELETE FROM %s \n" +
                             "WHERE %s = %d;",
@@ -105,7 +152,11 @@ public class DBHelper {
             db.close();
         }
 
-
+        /**
+         * callSqlLogins
+         * This method inserts various students into the SQLite database
+         * via SQL queries.
+         */
         public void callSqlLogins() {
             //INSERT INTO student (studentName, emailAddress, password)
             //VALUES ('Joseph Traglia', 'jt9469@desales.edu', 'Desales12345')
@@ -222,6 +273,13 @@ public class DBHelper {
             db.close();
         }
 
+        /**
+         * fetchAllStudents
+         * This method obtains all students currently located within the SQLite database by
+         * utilizing a cursor to get their attributes' position within a column.
+         *
+         * @return An ArrayList of Student objects.
+         */
         public ArrayList<Login> fetchAllStudents() {
             ArrayList<Login> allStudents = new ArrayList<Login>();
 
@@ -258,29 +316,63 @@ public class DBHelper {
     }
 
     /**
+     * MessageDBHelper
+     * This class represents the messenger app's message database helper for inserting
+     * message into the SQLite database.
      *
+     * @author Joseph Traglia
      */
     static class MessageDBHelper extends SQLiteOpenHelper {
 
         private static final String DB_NAME = "messages.db";
         private static final int DB_VERSION = 1;
 
+        /**
+         * MessageDBHelper
+         * This constructor is utilized for the MessageDBHelper class.
+         *
+         * @param context Context for the LoginDBHelper.
+         */
         public MessageDBHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
         }
 
+        /**
+         * onCreate
+         * This method creates the SQLite database.
+         *
+         * @param sqLiteDatabase Database table being created.
+         */
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
             System.out.println(DBContract.MessageEntry.CREATE_MESSAGE_TABLE_CMD);
             sqLiteDatabase.execSQL(DBContract.MessageEntry.CREATE_MESSAGE_TABLE_CMD);
         }
 
+        /**
+         * onUpgrade
+         * This method drops the SQLite database.
+         *
+         * @param sqLiteDatabase Database table being dropped.
+         * @param i              First cursor location.
+         * @param i1             Second cursor location.
+         */
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
             sqLiteDatabase.execSQL(DBContract.MessageEntry.DROP_MESSAGE_TABLE_CMD);
             onCreate(sqLiteDatabase);
         }
 
+        /**
+         * saveMessage
+         * This method inserts a student's message into the SQLite database.
+         *
+         * @param id             The Message's ID.
+         * @param conversationID The conversation the Message belongs to.
+         * @param contents       The contents of the Message.
+         * @param timestamp      The timestamp of the Message.
+         * @param senderID       The Message sender's ID.
+         */
         public void saveMessage(int id, int conversationID, String contents, String timestamp, int senderID) {
             //INSERT INTO message (sender, recipient, contents)
             //VALUES (1249469, 1249123, 'Hey, how are you doing?')
@@ -306,6 +398,13 @@ public class DBHelper {
             db.close();
         }
 
+        /**
+         * fetchAllMessages
+         * This method obtains all messages currently located within the SQLite database by
+         * utilizing a cursor to get their attributes' position within a column.
+         *
+         * @return An ArrayList of Message objects.
+         */
         public ArrayList<Message> fetchAllMessages() {
             ArrayList<Message> allMessages = new ArrayList<>();
 
@@ -343,8 +442,11 @@ public class DBHelper {
             return allMessages;
         }
 
-        public void addMessage()
-        {
+        /**
+         * addMessage
+         * This method adds a message to the SQLite database via SQL queries.
+         */
+        public void addMessage() {
 
             String insertMessageString1 = String.format("INSERT INTO %s (%s, %s, %s, %s) " +
                             "VALUES (%d, '%s', '%s', %d)",
@@ -1809,8 +1911,17 @@ public class DBHelper {
 
         }
 
-        public void addMessagewithInfo(int pos, int convId, String cont, String ts, int type)
-        {
+        /**
+         * addMessageWithInfo
+         * This method adds information to a pre-existing message with the SQLite database.
+         *
+         * @param pos    The Message's position within the database.
+         * @param convId The Message's conversation ID.
+         * @param cont   The Message's contents.
+         * @param ts     The Message's timestamp.
+         * @param type   The Message's type.
+         */
+        public void addMessagewithInfo(int pos, int convId, String cont, String ts, int type) {
             String insertMessageString1 = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) " +
                             "VALUES (%d, %d, '%s', '%s', %d)",
                     DBContract.MessageEntry.TABLE_NAME,
@@ -1836,7 +1947,11 @@ public class DBHelper {
     }
 
     /**
+     * MessageDBHelper
+     * This class represents the messenger app's message database helper for inserting
+     * messages into the SQLite database.
      *
+     * @author Joseph Traglia
      */
     static class ConversationDBHelper extends SQLiteOpenHelper {
 
@@ -1850,18 +1965,43 @@ public class DBHelper {
             super(context, DB_NAME, null, DB_VERSION);
         }
 
+        /**
+         * onCreate
+         * This method creates the SQLite database.
+         *
+         * @param sqLiteDatabase Database being created.
+         */
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
             System.out.println(DBContract.ConversationEntry.CREATE_CONVERSATION_TABLE_CMD);
             sqLiteDatabase.execSQL(DBContract.ConversationEntry.CREATE_CONVERSATION_TABLE_CMD);
         }
 
+        /**
+         * onUpgrade
+         * This method drops the SQLite database.
+         *
+         * @param sqLiteDatabase Database being dropped.
+         * @param i              First cursor location.
+         * @param i1             Second cursor location.
+         */
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
             sqLiteDatabase.execSQL(DBContract.ConversationEntry.DROP_CONVERSATION_TABLE_CMD);
             onCreate(sqLiteDatabase);
         }
 
+        /**
+         * saveConversation
+         * This method inserts a conversation into the SQLite database.
+         *
+         * @param conversationID  A Conversation's ID.
+         * @param student1ID      The first student in the Conversation.
+         * @param student2ID      The second student in the Conversation.
+         * @param imageID         The image ID of the recipient within the Conversation.
+         * @param timestamp       The time the last message was sent within the Conversation.
+         * @param lastMessageSent The contents of the last message sent within the Conversation.
+         */
         public void saveConversation(int conversationID, int student1ID, int student2ID, int imageID, String timestamp, String lastMessageSent) {
             //INSERT INTO message (int conversationId, String person1, String person2)
             //VALUES (, , 'Hey, how are you doing?')
@@ -1889,9 +2029,14 @@ public class DBHelper {
             db.close();
         }
 
+        /**
+         * fetchAllConversations
+         * This method obtains all conversations currently located within the SQLite database by
+         * utilizing a cursor to get their attributes' position within a column.
+         *
+         * @return An ArrayList of Student objects.
+         */
         public ArrayList<Conversation> fetchAllConversations() {
-//            messageDBHelper.fetchAllMessages();
-//            studentDBHelper.fetchAllStudents();
 
             ArrayList<Conversation> allConversations = new ArrayList<>();
 
@@ -1934,8 +2079,11 @@ public class DBHelper {
             return allConversations;
         }
 
-        public void insertConversation()
-        {
+        /**
+         * insertConversation
+         * This method inserts a conversation into the SQLite database via SQL queries.
+         */
+        public void insertConversation() {
 
             String insertConversationString1 = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) " +
                             "VALUES (%d, %d, %d, %d, '%s', '%s')",
@@ -2082,7 +2230,7 @@ public class DBHelper {
                     "10:03",
                     "How are you?");
 
-            String insertConversationString10 =  String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) " +
+            String insertConversationString10 = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) " +
                             "VALUES (%d, %d, %d, %d, '%s', '%s')",
                     DBContract.ConversationEntry.TABLE_NAME,
                     DBContract.ConversationEntry.COLUMN_CONVERSATION_ID,

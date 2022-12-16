@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Wyatt Giberson -->
+<!--Fragment for the type message bar that is included in the
+@FragmentMessages file. has a tappable search area and a custom send button-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -12,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/etMessage"
-        android:hint="Write a message"
+        android:hint="@string/write_a_message"
         android:textColor="#CFD8DC"
         android:textColorHint="#CFD8DC" />
 

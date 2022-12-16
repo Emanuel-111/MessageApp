@@ -1,22 +1,23 @@
 package com.hfab.desalesmessanger;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import java.util.ArrayList;
-import java.util.Random;
 
-
+/**
+ * @author Emanuel Luna
+ * LoginFragment - prompts the user to login to their account.
+ * If the password is correct, the user will be prompted to their conversations
+ */
 public class LoginFragment extends Fragment {
 
     private EditText etvEmailAddress;
@@ -25,8 +26,8 @@ public class LoginFragment extends Fragment {
     private DBHelper.LoginDBHelper loginDBHelper;
     private DBHelper.MessageDBHelper messageDBHelper;
     private DBHelper.ConversationDBHelper convDBHelper;
-
-    private ImageView imageView;
+    private ArrayList<Login> allLogins;
+    private Toast toast;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,58 +40,61 @@ public class LoginFragment extends Fragment {
         messageDBHelper = new DBHelper.MessageDBHelper(getContext());
         convDBHelper = new DBHelper.ConversationDBHelper(getContext());
 
-        // DO NOT DELETE,
-        // When you run the app for the first time, uncomment these lines
-        // then comment them again to show the databases
+        /*
+        DO NOT DELETE,
+        When you run the app for the first time, uncomment these lines
+        then comment them again to show the databases
 
-        /*loginDBHelper.callSqlLogins();
+        loginDBHelper.callSqlLogins();
         messageDBHelper.addMessage();
         convDBHelper.insertConversation();*/
 
         // Fill the arrayList with the logins
-        ArrayList<Login> allLogins = loginDBHelper.fetchAllStudents();
+        allLogins = loginDBHelper.fetchAllStudents();
 
         etvEmailAddress = view.findViewById(R.id.etv_email);
         etvPassword = view.findViewById(R.id.etv_password);
         btnLogin = view.findViewById(R.id.btn_login);
 
+        toast = new Toast(getContext());
+
+        /**
+         * btnLogin - When the user clicks the login button, it will check to
+         * see if the email address and password are correct.
+         * If both are correct, the user will be logged into their
+         * account.
+         */
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                // Grab the email address and password the user typed
                 String emailAddress = etvEmailAddress.getText().toString();
                 String password = etvPassword.getText().toString();
 
-                for (int i = 0; i < allLogins.size(); i++)
-                {
-                    if(emailAddress.equals(allLogins.get(i).getEmailAddress()))
-                    {
-                        if(password.equals(allLogins.get(i).getPassword()))
-                        {
+                // For every login
+                for (int i = 0; i < allLogins.size(); i++) {
+                    // If the emailAddress is correct, check the password
+                    if (emailAddress.equals(allLogins.get(i).getEmailAddress())) {
+                        // If the password is correct, log the user into their account
+                        if (password.equals(allLogins.get(i).getPassword())) {
                             LoginFragmentDirections.ActionLoginFragmentToConversationFragment action =
                                     LoginFragmentDirections.actionLoginFragmentToConversationFragment("" + allLogins.get(i).getId());
 
                             Navigation.findNavController(view).navigate(action);
                             break;
-
+                            // Otherwise, tell the user the password is incorrect
+                        } else {
+                            toast.makeText(getContext(), "Password is incorrect", Toast.LENGTH_SHORT).show();
                         }
-
-                        else
-                        {
-                                Toast.makeText(getContext(), "Password is incorrect", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    else
-                    {
-                        Toast.makeText(getContext(), "Email is incorrect", Toast.LENGTH_SHORT).show();
+                        // Otherwise, tell the user the email address is incorrect
+                    } else {
+                        toast.makeText(getContext(), "Email is incorrect", Toast.LENGTH_SHORT).show();
                     }
                 }
 
             }
         });
-
-
 
         return view;
     }

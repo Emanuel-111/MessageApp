@@ -1,20 +1,22 @@
 package com.hfab.desalesmessanger;
 
-import java.sql.Timestamp;
-
+//Wyatt Giberson
+//This is the Message Class That Stores Information about the message object. and is used to create individual messages from the DB
 public class Message {
 
+    //Private Variables
     private int id;
     private int conversationID;
     private String contents;
     private String timestamp;
     private int senderID;
 
+    //Constants for Message Type
     public final static int TYPE_SENT = 0;
     public final static int TYPE_RECEIVED = 1;
 
-    public Message(int id, int conversationID, String contents, String timestamp, int senderID)
-    {
+    //Constructor For Message Class
+    public Message(int id, int conversationID, String contents, String timestamp, int senderID) {
         this.id = id;
         this.conversationID = conversationID;
         this.contents = contents;
@@ -22,6 +24,7 @@ public class Message {
         this.senderID = senderID;
     }
 
+    //Getter's and Setter's
     public int getId() {
         return id;
     }
@@ -62,6 +65,8 @@ public class Message {
         this.senderID = senderID;
     }
 
+
+    //To String
     @Override
     public String toString() {
         return "Message{" +
